@@ -1,4 +1,22 @@
 {% extends 'cr/home.html' %}
 {% block content %}
 <h1>Cards:</h1>
+
+    {% for card in cards %}
+    <hr>
+    <div>
+        <div>
+            <span>{{ card.name }}</span>
+            <p>Level: {{ card.level }}</p>
+            <p>Rarity: {{ card.rarity }}</p>
+            {% if card.cost > 0 %}
+                <p>Elixir Cost: {{ card.cost }}</p>
+            {% else %}
+                <p>Elixir Cost: Free</p>
+            {% endif %}
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+
 {% endblock %}
