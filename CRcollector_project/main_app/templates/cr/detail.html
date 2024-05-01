@@ -1,11 +1,9 @@
 {% extends 'cr/home.html' %}
 {% block content %}
-<h1>Cards:</h1>
+<h1>{{card.name}}</h1>
 
-    {% for card in cards %}
-    <hr>
+<hr>
     <div>
-        <a href="/cards/{{card.id}}">Learn More</a>
         <div>
             <h3><span>{{ card.name }}</span></h3>
             <p>Level: {{ card.level }}</p>
@@ -18,6 +16,5 @@
         </div>
     </div>
     <hr>
-    {% endfor %}
 
 {% endblock %}
