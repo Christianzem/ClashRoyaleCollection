@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Card
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
 
 
 # cards = [
@@ -25,4 +26,6 @@ def cards_detail(request, card_id):
     card = Card.objects.get(id=card_id)
     return render(request, 'cr/detail.html', {'card':card})
 
-
+class CardCreate(CreateView):
+    model = Card
+    fields = ['name','level','rarity','cost']
