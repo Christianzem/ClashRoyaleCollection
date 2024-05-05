@@ -13,6 +13,10 @@
             {% else %}
                 <p>Elixir Cost: Free</p>
             {% endif %}
+            <div>
+                <a href="{% url 'cards_update' card.id %}">EDIT</a>
+                <a href="{% url 'cards_delete' card.id %}">DELETE</a>
+            </div>
         </div>
     </div>
     <hr>

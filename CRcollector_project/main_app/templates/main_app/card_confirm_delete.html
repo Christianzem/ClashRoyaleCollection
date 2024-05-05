@@ -1,0 +1,14 @@
+{% extends 'cr/home.html' %}
+{% block content %}
+
+<h1>Delete Card</h1>
+
+<h4>Are you sure you want to delete {{object.name}}</h4>
+
+<form action="" method="POST">
+    {% csrf_token %}
+    <input type="submit" value="Yes - Delete!"/>
+    <a href="{% url 'details' card.id %}">Cancel</a>
+</form>
+
+{% endblock %}

@@ -29,3 +29,11 @@ def cards_detail(request, card_id):
 class CardCreate(CreateView):
     model = Card
     fields = ['name','level','rarity','cost']
+
+class CardUpdate(UpdateView):
+    model = Card
+    fields = ['name','level','rarity','cost']
+
+class CardDelete(DeleteView):
+    model = Card
+    success_url = '/cards/'
