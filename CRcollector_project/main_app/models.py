@@ -37,4 +37,6 @@ class Status(models.Model):
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f"{self.get_level_display()} on {self.date}"
+        return f"{self.get_status_display()} on {self.date}"
+    
+    

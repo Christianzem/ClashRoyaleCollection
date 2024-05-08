@@ -19,6 +19,23 @@
             </div>
         </div>
     </div>
+
+<!-- This is the Markup for showing the cards' statuses.  -->
+<div>
+    <table>
+        <thread>
+            <tr><th>Date</th><th>Level</th></tr>
+        </thread>
+        <tbody>
+            {% for status in card.status_set.all %}
+            <tr>
+                <td>{{status.date}}</td>
+                <td>{{status.get_status_display}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
     <hr>
 
 {% endblock %}

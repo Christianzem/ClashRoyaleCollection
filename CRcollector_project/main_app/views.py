@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from .models import Card
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from .forms import StatusForm
 
 
 # cards = [
@@ -24,7 +25,8 @@ def cards_index(request):
 
 def cards_detail(request, card_id):
     card = Card.objects.get(id=card_id)
-    return render(request, 'cr/detail.html', {'card':card})
+    status_form = StatusForm()
+    return render(request, 'cr/detail.html', {'card':card, 'status_form': status_form})
 
 class CardCreate(CreateView):
     model = Card
