@@ -1,0 +1,11 @@
+{% extends 'cr/home.html' %}
+{% block content %}
+
+<h1>Player Details</h1>
+
+<h3>{{player.player_name}}</h3>
+
+<a href="{% url 'player_update' player.id %}">EDIT</a>
+<a href="{% url 'player_delete' player.id %}">DELETE</a>
+
+{% endblock %}

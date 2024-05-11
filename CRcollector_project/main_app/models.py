@@ -18,12 +18,23 @@ STATUS = (
     ('13', 'LEVEL 13'),
     ('14', 'LEVEL 14'),
 )
+
+class Player(models.Model):
+    player_name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.player_name
+    
+    def get_absolute_url(self):
+        return reverse('players_detail', kwargs={'pk': self.id})
+    
 # Create your models here.
 class Card(models.Model):
     name = models.CharField(max_length=100)
     level = models.IntegerField()
     rarity = models.CharField(max_length=100)
     cost = models.IntegerField()
+    players = models.ManyToManyField(Player)
 
     def __str__(self):
         return self.name

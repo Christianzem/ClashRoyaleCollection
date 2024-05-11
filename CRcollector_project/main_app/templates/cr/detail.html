@@ -45,4 +45,36 @@
 </div>
     <hr>
 
+    <div>
+        <h3>{{ card.name }}'s Players</h3>
+        {% if card.players.count %}
+            {% for player in card.players.all %}
+                <h1>{{player.player_name}}</h1>
+                <div>
+                    <form action="{% url 'assoc_delete' card.id player.id %}" method="POST">
+                        {% csrf_token %}
+                        <button type="submit">REMOVE</button>
+                    </form>
+                </div>
+            {% endfor %}
+        {% else %}
+            <h4>No Gaming Buddies</h4>
+        {% endif %}
+    </div>
+
+    <div>
+        <h3>Local Players</h3>
+        {% if players.count %}
+            {% for player in players.all %}
+            <h5>{{player.player_name}}</h5>
+            <form action="{% url 'assoc_player' card.id player.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">ADD FRIEND</button>
+            </form>
+            {% endfor %}
+        {% else %}
+            <h5>{{card.name}} is Friends with Everyone!</h5>
+        {% endif %}
+    </div>
+
 {% endblock %}
