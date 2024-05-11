@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Card
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from .forms import StatusForm
@@ -27,6 +27,14 @@ def cards_detail(request, card_id):
     card = Card.objects.get(id=card_id)
     status_form = StatusForm()
     return render(request, 'cr/detail.html', {'card':card, 'status_form': status_form})
+
+def add_status(request, pk):
+    form = StatusForm(request.POST)
+    if form.is_valid():
+        new_status = form.save(commit=False)
+        new_status.card_id = pk
+        new_status.save()
+    return redirect('details', card_id=pk)
 
 class CardCreate(CreateView):
     model = Card

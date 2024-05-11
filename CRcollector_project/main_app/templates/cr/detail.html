@@ -20,8 +20,15 @@
         </div>
     </div>
 
+<form action="{% url 'add_status' card.id %}" method="POST">
+    {% csrf_token %}
+    {{ status_form.as_p }}
+    <input type="submit" value="Add Level"/>
+</form>
+
 <!-- This is the Markup for showing the cards' statuses.  -->
 <div>
+    <h3>Level Status</h3>
     <table>
         <thread>
             <tr><th>Date</th><th>Level</th></tr>
