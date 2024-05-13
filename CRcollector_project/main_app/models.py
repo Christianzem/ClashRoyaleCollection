@@ -2,6 +2,7 @@ from django.db import models
 from django.urls import reverse
 
 
+
 STATUS = (
     ('1', 'LEVEL 1'),
     ('2', 'LEVEL 2'),
@@ -42,7 +43,7 @@ class Card(models.Model):
         return reverse('details', kwargs={'card_id': self.id})
     
 class Status(models.Model):
-    date = models.DateField('Upgraded on')
+    date = models.DateField('Upgraded on(example: 2024-05-12)') #Was unsure of adding a placeholder text. 
     status = models.CharField(max_length=14, choices=STATUS, default=STATUS[0][0])
     card = models.ForeignKey(Card, on_delete=models.CASCADE)
 
@@ -51,5 +52,5 @@ class Status(models.Model):
     
     class Meta:
         ordering = ['-date']
-    
+
     
