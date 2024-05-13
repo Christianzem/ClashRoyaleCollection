@@ -1,11 +1,21 @@
 {% extends 'cr/home.html' %}
 {% block content %}
 
-<h1>Player Details</h1>
+<div class="container">
+    <h1>Player Details</h1>
 
-<h3>{{player.player_name}}</h3>
-
-<a href="{% url 'player_update' player.id %}">EDIT</a>
-<a href="{% url 'player_delete' player.id %}">DELETE</a>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h3 class="card-title">{{ player.player_name }}</h3>
+            <p class="card-text">
+                Hi, my name is {{ player.player_name }} and I have been playing for 5 years and would love to become your gaming buddy!
+            </p>
+            <div class="mt-3">
+                <a href="{% url 'player_update' player.id %}" class="btn btn-primary mr-2">EDIT</a>
+                <a href="{% url 'player_delete' player.id %}" class="btn btn-danger">DELETE</a>
+            </div>
+        </div>
+    </div>
+</div>
 
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends 'cr/home.html' %}
 {% block content %}
-<h1>{{card.name}}</h1>
+<div class="container">
+<h1>{{card.name}} Details</h1>
 
 <hr>
     <div>
@@ -14,22 +15,20 @@
                 <p>Elixir Cost: Free</p>
             {% endif %}
             <div>
-                <a href="{% url 'cards_update' card.id %}">EDIT</a>
-                <a href="{% url 'cards_delete' card.id %}">DELETE</a>
+                <a class="btn btn-success btn-sm" href="{% url 'cards_update' card.id %}">EDIT</a>
+                <a class="btn btn-danger btn-sm" href="{% url 'cards_delete' card.id %}">DELETE</a>
             </div>
         </div>
     </div>
-
-<form action="{% url 'add_status' card.id %}" method="POST">
-    {% csrf_token %}
-    {{ status_form.as_p }}
-    <input type="submit" value="Add Level"/>
-</form>
-
+<div class="text-end">
+    <form action="{% url 'add_status' card.id %}" method="POST">
+        {% csrf_token %}
+        {{ status_form.as_p }}
+        <input class="btn btn-success btn-sm" type="submit" value="Add Level"/>
+    </form>    
 <!-- This is the Markup for showing the cards' statuses.  -->
-<div>
-    <h3>Level Status</h3>
-    <table>
+    <h3 class="text-center">Level Status</h3>
+    <table class="table table-striped">
         <thread>
             <tr><th>Date</th><th>Level</th></tr>
         </thread>
@@ -44,37 +43,43 @@
     </table>
 </div>
     <hr>
-
-    <div>
-        <h3>{{ card.name }}'s Players</h3>
-        {% if card.players.count %}
-            {% for player in card.players.all %}
-                <h1>{{player.player_name}}</h1>
-                <div>
-                    <form action="{% url 'assoc_delete' card.id player.id %}" method="POST">
-                        {% csrf_token %}
-                        <button type="submit">REMOVE</button>
-                    </form>
-                </div>
-            {% endfor %}
-        {% else %}
-            <h4>No Gaming Buddies</h4>
-        {% endif %}
+    <!-- Removal and Adding Existing Players -->
+    <div class="d-inline p-5">
+        <div class="row">
+            <div class="col">
+                <h3>{{ card.name }}'s Players</h3>
+                {% if card.players.count %}
+                    {% for player in card.players.all %}
+                        <div class="d-inline-block mr-3">
+                            <h3>{{ player.player_name }}</h3>
+                            <form class="d-inline" action="{% url 'assoc_delete' card.id player.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-danger btn-sm">REMOVE</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h4>No Gaming Buddies</h4>
+                {% endif %}
+            </div>
+    
+            <div class="col">
+                <h3>Local Players</h3>
+                {% if players.count %}
+                    {% for player in players.all %}
+                        <div class="d-inline-block mr-3">
+                            <h3>{{ player.player_name }}</h3>
+                            <form class="d-inline" action="{% url 'assoc_player' card.id player.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit" class="btn btn-success btn-sm">ADD FRIEND</button>
+                            </form>
+                        </div>
+                    {% endfor %}
+                {% else %}
+                    <h5>{{ card.name }} is Friends with Everyone!</h5>
+                {% endif %}
+            </div>
+        </div>
     </div>
-
-    <div>
-        <h3>Local Players</h3>
-        {% if players.count %}
-            {% for player in players.all %}
-            <h5>{{player.player_name}}</h5>
-            <form action="{% url 'assoc_player' card.id player.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">ADD FRIEND</button>
-            </form>
-            {% endfor %}
-        {% else %}
-            <h5>{{card.name}} is Friends with Everyone!</h5>
-        {% endif %}
-    </div>
-
+    
 {% endblock %}

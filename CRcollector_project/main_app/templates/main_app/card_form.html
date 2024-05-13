@@ -1,16 +1,21 @@
 {% extends 'cr/home.html' %}
 {% block content %}
-{% if object %}
-    <h1>EDIT <span class="teal-text">{{object.name}}</span></h1>
-{% else %}
-    <h1>Add Card</h1>
-{% endif %}
+<div class="container">
+    <div class="card p-4 shadow-sm">
+        {% if object %}
+            <h1 class="mb-4">Edit <span class="text-primary">{{ object.name }}</span></h1>
+        {% else %}
+            <h1 class="mb-4">Add Card</h1>
+        {% endif %}
 
-<form action="" method="POST">
-{% csrf_token %}
-<table>
-    {{form.as_table}}
-</table>
-<input type="submit" value="Submit" class="btn"/>
-</form>
+        <form action="" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                {{ form.as_p }}
+            </div>
+            <button type="submit" class="btn btn-primary btn-block py-2 rounded-pill">Submit</button>
+        </form>
+    </div>
+</div>
+
 {% endblock %}

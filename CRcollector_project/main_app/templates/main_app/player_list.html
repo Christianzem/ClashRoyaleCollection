@@ -1,13 +1,25 @@
 {% extends 'cr/home.html' %}
 {% block content %}
 
-<h1>Player List</h1>
+<div class="container">
+    <h1>Players List</h1>
 
-{% for player in player_list %}
-<a href="{% url 'players_detail' Player.id %}">
-    <h1>{{player.player_name}}</h1>
-</a>
+    <div class="row">
+        <div class="col">
+            <h3>Potential Gaming Buddies:</h3>
 
-{% endfor %}
+            <div class="card">
+                <div class="card-body">
+                    {% for player in player_list %}
+                        <a href="{% url 'players_detail' player.id %}" class="text-decoration-none">
+                            <h5 class="card-title">{{ player.player_name }}</h5>
+                        </a>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 {% endblock %}

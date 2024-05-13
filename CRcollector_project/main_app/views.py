@@ -72,7 +72,7 @@ class PlayerCreate(CreateView):
 
 class PlayerUpdate(UpdateView):
     model = Player
-    fields = 'player_name'
+    fields = ('player_name', )
 
 class PlayerDelete(DeleteView):
     model = Player
