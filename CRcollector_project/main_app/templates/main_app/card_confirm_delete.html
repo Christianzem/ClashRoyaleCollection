@@ -1,14 +1,20 @@
 {% extends 'cr/home.html' %}
 {% block content %}
 
-<h1>Delete Card</h1>
+<div class="container">
+    <h1>Delete Card</h1>
 
-<h4>Are you sure you want to delete {{object.name}}</h4>
+    <div class="card mb-4">
+        <div class="card-body">
+            <h4 class="card-title">Are you sure you want to delete <span class="text-danger">{{ object.name }}</span>?</h4>
+            <form action="" method="POST" class="mt-4">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger mr-2">Yes - Delete!</button>
+                <a href="{% url 'details' card.id %}" class="btn btn-secondary">Cancel</a>
+            </form>
+        </div>
+    </div>
+</div>
 
-<form action="" method="POST">
-    {% csrf_token %}
-    <input type="submit" value="Yes - Delete!"/>
-    <a href="{% url 'details' card.id %}">Cancel</a>
-</form>
 
 {% endblock %}

@@ -50,11 +50,11 @@ def assoc_delete(request, pk, player_pk):
 
 class CardCreate(CreateView):
     model = Card
-    fields = ['name','level','rarity','cost']
+    fields = ['name','rarity','cost']
 
 class CardUpdate(UpdateView):
     model = Card
-    fields = ['name','level','rarity','cost']
+    fields = ['name','rarity','cost']
 
 class CardDelete(DeleteView):
     model = Card
